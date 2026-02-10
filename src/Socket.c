@@ -293,8 +293,9 @@ int Socket_pair()
 
 int Socket_interrupt()
 {
-	printf("Calling interrupt\n");
+	FUNC_ENTRY;
 	int rc = send(sockfd[1], "\0", 1, 0);
+	FUNC_EXIT_RC(rc);
 	return rc;
 }
 
