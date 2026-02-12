@@ -2086,9 +2086,9 @@ thread_return_type WINAPI MQTTAsync_receiveThread(void* n)
 		MQTTPacket* pack = NULL;
 
 		MQTTAsync_unlock_mutex(mqttasync_mutex);
-		Log(TRACE_PROTOCOL, -1, "MQTTAsync_cycle call timeout %lu", timeout);
+		Log(TRACE_MINIMUM, -1, "MQTTAsync_cycle call timeout %lu", timeout);
 		pack = MQTTAsync_cycle(&sock, timeout, &rc);
-		Log(TRACE_PROTOCOL, -1, "MQTTAsync_cycle returns pack %p, sock %d, timeout %lu, rc %d", pack, sock, timeout, rc);
+		Log(TRACE_MINIMUM, -1, "MQTTAsync_cycle returns pack %p, sock %d, timeout %lu, rc %d", pack, sock, timeout, rc);
 		MQTTAsync_lock_mutex(mqttasync_mutex);
 		if (MQTTAsync_tostop)
 			break;
