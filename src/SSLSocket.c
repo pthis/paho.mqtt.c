@@ -27,6 +27,7 @@
  */
 
 #if defined(OPENSSL)
+#include "Heap.h"
 
 #include "SocketBuffer.h"
 #include "MQTTClient.h"
@@ -727,9 +728,10 @@ int SSLSocket_setSocketForSSL(networkHandles* net, MQTTClient_SSLOptions* opts,
 		if ((net->ssl = SSL_new(net->ctx)) == NULL)
 		{
 			if (opts->struct_version >= 3)
-				rc = SSLSocket_error("SSL_new", net->ssl, net->socket, rc, opts->ssl_error_cb, opts->ssl_error_context);
+				SSLSocket_error("SSL_new", net->ssl, net->socket, rc, opts->ssl_error_cb, opts->ssl_error_context);
 			else
-				rc = SSLSocket_error("SSL_new", net->ssl, net->socket, rc, NULL, NULL);
+				SSLSocket_error("SSL_new", net->ssl, net->socket, rc, NULL, NULL);
+			rc = PAHO_MEMORY_ERROR;
 			goto exit;
 		}
 
